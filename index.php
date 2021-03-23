@@ -116,25 +116,14 @@ if(isset($_POST['products'])) {
     foreach($products_Select AS $i => $choice) {
         if ($choice > 0) {
             $totalValue += $choice * $products[$i]['price'];
-         }
+        }
     }
     $_SESSION['total-price'] = $totalValue;
 }
 
 // correct form
 if (isset($email, $street, $streetNumber, $city, $zipcode, $totalValue, $deliveryTime)) {
-    
-    $_SESSION["email"] = $email;
-    $_SESSION["street"] = $street;
-    $_SESSION["streetNum"] = $streetNum;
-    $_SESSION["city"] = $city;
-    $_SESSION["zipcode"] = $zipcode;
-
-    if ($totalValue == 0) {
-        $noOrder = "No product ordered. Invalid order.";
-    } else {
-        $correctForm = "<h3>Buon appetito!</h3> </br>Your order placed with the email <strong>'$email'</strong> has been completed. </br>You payed <strong>&euro; $totalValue</strong></br> Your order has been sent to the following address: <strong>$street n° $streetNum, $city $zipcode</strong>.</br>Delivery is expected at: <strong>$deliveryTime</strong>";
-    }
+    $correctForm = "Your order placed with the email '$email' for &euro; $totalValue has been sent to the following address: $street $streetNumber, $city $zipcode. Delivery is expected at: $deliveryTime";
 
 // session
     $_SESSION["address"] = "$street $streetNumber, $city $zipcode";
@@ -151,7 +140,5 @@ function whatIsHappening() {
     var_dump($_SESSION);
 }
 
-
-//require 'order-form.php';
 
 require './src/order-form.php';
